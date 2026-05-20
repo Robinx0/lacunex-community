@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`export formats > HTML — body fragment shape is stable across runs 1`] = `undefined`;
+
+exports[`export formats > Markdown — output matches snapshot 1`] = `
+"# Test report
+
+**Client:** Acme
+**Document ID:** X-001
+**Classification:** Confidential
+**Version:** 1.0
+**Period:** 2026-04-01 — 2026-04-15
+**Authors:** I. Montasir
+**Methodology:** OSSTMM 3
+
+---
+
+# Executive Summary
+
+Acme retained us for a quick external test.
+
+### ACME-001 — SQL Injection in /login
+
+**Severity:** Critical  
+**CVSS:** 9.8  
+**CWE:** CWE-89  
+**Affected:** /login  
+**Status:** Open
+
+**Description.** Concatenated SQL allows authentication bypass and RCE.
+
+**Proof-of-concept**
+
+1. Submit ' OR 1=1--
+2. Observe bypass
+
+**Remediation.** Parameterize queries.
+"
+`;

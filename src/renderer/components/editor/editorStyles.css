@@ -1,0 +1,870 @@
+/*
+ * Editor surface styling. Tailwind utilities can't reach inside Tiptap's
+ * `contenteditable`, so the prose-ish typography lives here. Variable
+ * references resolve through the active editor theme.
+ */
+
+.rb-editor-root {
+  position: relative;
+  flex: 1;
+  min-height: 320px;
+}
+
+.rb-prose {
+  font-family: var(--rb-font-ui);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--rb-text-primary);
+}
+
+.rb-prose p {
+  margin: 0 0 6px;
+}
+
+.rb-prose h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 28px 0 8px;
+  letter-spacing: -0.01em;
+  color: var(--rb-text-primary);
+}
+
+.rb-prose h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 22px 0 6px;
+  color: var(--rb-text-primary);
+}
+
+.rb-prose h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 18px 0 6px;
+  color: var(--rb-text-primary);
+}
+
+.rb-prose ul,
+.rb-prose ol {
+  padding-left: 24px;
+  margin: 4px 0 8px;
+}
+
+.rb-prose ul > li {
+  list-style-type: disc;
+}
+
+.rb-prose ol > li {
+  list-style-type: decimal;
+}
+
+.rb-prose li {
+  margin: 2px 0;
+}
+
+.rb-prose blockquote {
+  border-left: 2px solid var(--rb-border-strong);
+  padding: 2px 0 2px 14px;
+  margin: 8px 0;
+  color: var(--rb-text-secondary);
+  font-style: italic;
+}
+
+.rb-prose pre,
+.rb-prose .rb-code {
+  font-family: var(--rb-font-mono);
+  font-size: 13px;
+  line-height: 1.55;
+  background: var(--rb-bg-elevated);
+  color: var(--rb-text-primary);
+  border: 1px solid var(--rb-border-subtle);
+  border-radius: var(--rb-radius);
+  padding: 12px 14px;
+  margin: 8px 0;
+  /* Wrap long lines so the editor matches the printed PDF. */
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  tab-size: 2;
+}
+
+.rb-prose code {
+  font-family: var(--rb-font-mono);
+  font-size: 0.92em;
+  background: var(--rb-gray-bg);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+.rb-prose hr {
+  border: 0;
+  border-top: 1px solid var(--rb-border-subtle);
+  margin: 16px 0;
+}
+
+.rb-prose strong {
+  font-weight: 600;
+}
+
+.rb-prose em {
+  font-style: italic;
+}
+
+/* Tiptap placeholder helper */
+.rb-prose p.is-editor-empty:first-child::before,
+.rb-prose h1.is-empty::before,
+.rb-prose h2.is-empty::before,
+.rb-prose h3.is-empty::before {
+  color: var(--rb-text-subtle);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* The hover handle */
+.rb-block-handle {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--rb-radius);
+  background: transparent;
+  color: var(--rb-text-muted);
+  font-size: 11px;
+  line-height: 1;
+  cursor: grab;
+  transition: background 0.15s, color 0.15s;
+  border: none;
+  user-select: none;
+}
+
+.rb-block-handle:hover {
+  background: var(--rb-bg-hover);
+  color: var(--rb-text-primary);
+}
+
+.rb-block-handle:focus-visible {
+  outline: 2px solid var(--rb-blue);
+  outline-offset: 1px;
+}
+
+/* Focus styling */
+.rb-prose :focus {
+  outline: none;
+}
+
+.rb-prose ::selection {
+  background: var(--rb-bg-active);
+}
+
+/* =========================================================
+   Security blocks
+   ========================================================= */
+
+/* inline pills (severity badge, asset chip, cve) */
+.rb-inline-badge {
+  display: inline-flex;
+  vertical-align: middle;
+  margin: 0 1px;
+  user-select: none;
+}
+
+.rb-sev-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 8px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  /* Smooth transitions when severity flips in the finding panel. */
+  transition: color 200ms ease-out, background-color 200ms ease-out;
+}
+
+.rb-asset-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  padding: 0 8px;
+  border: 1px solid currentColor;
+  border-radius: var(--rb-radius);
+  font-family: var(--rb-font-mono);
+  font-size: 11px;
+  background: transparent;
+}
+
+.rb-asset-chip__type {
+  opacity: 0.7;
+  text-transform: uppercase;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+}
+
+.rb-asset-chip__value {
+  font-weight: 600;
+}
+
+.rb-cve-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: var(--rb-radius);
+  background: var(--rb-purple-bg);
+  color: var(--rb-purple);
+  font-family: var(--rb-font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.rb-cve-id {
+  letter-spacing: 0.02em;
+}
+
+.rb-cve-score {
+  margin-left: 6px;
+  padding-left: 6px;
+  border-left: 1px solid currentColor;
+  opacity: 0.85;
+  font-size: 10px;
+}
+
+.rb-cve-input {
+  background: var(--rb-bg-popover);
+  color: var(--rb-text-primary);
+  border: 1px solid var(--rb-border-strong);
+  border-radius: var(--rb-radius);
+  padding: 1px 6px;
+  font-family: var(--rb-font-mono);
+  font-size: 11px;
+  outline: none;
+  width: 160px;
+}
+
+/* callout */
+.rb-callout {
+  margin: 12px 0;
+  padding: 12px 14px 10px 14px;
+  border-radius: var(--rb-radius-lg);
+  border: 1px solid var(--rb-border-subtle);
+}
+
+.rb-callout__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.rb-callout__icon {
+  width: 14px;
+  height: 14px;
+}
+
+.rb-callout__label {
+  background: transparent;
+  color: var(--rb-text-primary);
+  border: none;
+  font-weight: 600;
+  font-size: 13px;
+  outline: none;
+  flex: 1;
+}
+
+.rb-callout__kind {
+  background: var(--rb-bg-popover);
+  color: var(--rb-text-secondary);
+  border: 1px solid var(--rb-border-subtle);
+  border-radius: var(--rb-radius);
+  padding: 1px 4px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.rb-callout__body p {
+  margin: 0;
+  color: var(--rb-text-primary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* code block (lowlight wrapper) */
+.rb-code-wrap {
+  margin: 12px 0;
+  border: 1px solid var(--rb-border-subtle);
+  border-radius: var(--rb-radius-lg);
+  overflow: hidden;
+}
+
+.rb-code-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--rb-bg-elevated);
+  border-bottom: 1px solid var(--rb-border-subtle);
+}
+
+.rb-code-lang {
+  background: var(--rb-bg-popover);
+  color: var(--rb-text-secondary);
+  border: 1px solid var(--rb-border-subtle);
+  border-radius: var(--rb-radius);
+  padding: 2px 6px;
+  font-family: var(--rb-font-mono);
+  font-size: 10px;
+}
+
+.rb-code-copy {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  color: var(--rb-text-secondary);
+  border: 1px solid var(--rb-border-subtle);
+  border-radius: var(--rb-radius);
+  padding: 2px 6px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.rb-code-copy:hover {
+  color: var(--rb-text-primary);
+  background: var(--rb-bg-hover);
+}
+
+.rb-code-wrap pre.rb-code {
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+
+/* PoC steps */
+.rb-poc {
+  margin: 12px 0;
+  padding: 12px 14px;
+  border-radius: var(--rb-radius-lg);
+  border: 1px solid var(--rb-border-subtle);
+  background: var(--rb-bg-faint);
+}
+
+.rb-poc__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.rb-poc__title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--rb-text-secondary);
+}
+
+.rb-poc__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rb-poc__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rb-poc__num {
+  font-family: var(--rb-font-mono);
+  font-size: 11px;
+  width: 22px;
+  text-align: right;
+  color: var(--rb-text-muted);
+}
+
+.rb-poc__input {
+  flex: 1;
+  background: var(--rb-bg-base);
+  color: var(--rb-text-primary);
+  border: 1px solid var(--rb-border-subtle);
+  border-radius: var(--rb-radius);
+  padding: 4px 8px;
+  font-size: 13px;
+  outline: none;
+}
+
+.rb-poc__input:focus {
+  border-color: var(--rb-blue);
+}
+
+.rb-poc__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: transparent;
+  color: var(--rb-text-muted);
+  border: 1px solid var(--rb-border-subtle);
+  border-radius: var(--rb-radius);
+  cursor: pointer;
+}
+
+.rb-poc__btn:hover:not(:disabled) {
+  color: var(--rb-text-primary);
+  background: var(--rb-bg-hover);
+}
+
+.rb-poc__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.rb-poc__btn--danger:hover {
+  color: var(--rb-red);
+}
+
+.rb-poc__add {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  background: transparent;
+  color: var(--rb-text-secondary);
+  border: 1px dashed var(--rb-border-strong);
+  border-radius: var(--rb-radius);
+  padding: 3px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.rb-poc__add:hover {
+  color: var(--rb-text-primary);
+  background: var(--rb-bg-hover);
+}
+
+/* HTTP request/response */
+.rb-http {
+  margin: 12px 0;
+  border: 1px solid var(--rb-border-subtle);
+  border-radius: var(--rb-radius-lg);
+  overflow: hidden;
+}
+
+.rb-http__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--rb-bg-elevated);
+  border-bottom: 1px solid var(--rb-border-subtle);
+}
+
+.rb-http__title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--rb-text-secondary);
+}
+
+.rb-http__status {
+  font-family: var(--rb-font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 9999px;
+}
+
+.rb-http__panes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.rb-http__pane {
+  background: var(--rb-bg-base);
+  color: var(--rb-text-primary);
+  border: none;
+  border-right: 1px solid var(--rb-border-subtle);
+  font-family: var(--rb-font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 10px 12px;
+  resize: vertical;
+  min-height: 120px;
+  outline: none;
+}
+
+.rb-http__pane:last-child {
+  border-right: none;
+}
+
+/* screenshot */
+.rb-screenshot {
+  margin: 12px 0;
+}
+
+.rb-screenshot__drop {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 140px;
+  border: 1px dashed var(--rb-border-strong);
+  border-radius: var(--rb-radius-lg);
+  background: var(--rb-bg-faint);
+  color: var(--rb-text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.rb-screenshot__drop:hover,
+.rb-screenshot__drop.is-over {
+  background: var(--rb-bg-hover);
+  border-color: var(--rb-blue);
+  color: var(--rb-text-primary);
+}
+
+.rb-screenshot__media {
+  position: relative;
+  border-radius: var(--rb-radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--rb-border-subtle);
+  background: var(--rb-bg-elevated);
+}
+
+.rb-screenshot__media img {
+  display: block;
+  max-width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.rb-screenshot__remove {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.rb-screenshot__remove:hover {
+  background: var(--rb-red, rgba(220, 38, 38, 0.85));
+}
+
+/* Relative wrapper so the X button can absolute-position over the drop area. */
+.rb-screenshot__drop-wrap {
+  position: relative;
+}
+.rb-screenshot__remove--empty {
+  /* In the empty state the X needs a lighter background so it
+     stays visible against the dashed drop-zone tint. */
+  background: var(--rb-bg-elevated);
+  color: var(--rb-text-secondary);
+  border: 1px solid var(--rb-border-subtle);
+}
+.rb-screenshot__remove--empty:hover {
+  color: #fff;
+}
+
+.rb-screenshot__caption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.rb-screenshot__figure {
+  font-size: 11px;
+  color: var(--rb-text-muted);
+  font-family: var(--rb-font-mono);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.rb-screenshot__figure-prefix {
+  user-select: none;
+}
+
+/* Reads as plain text until hover/focus — matches caption input. */
+.rb-screenshot__figure-input {
+  background: transparent;
+  color: var(--rb-text-muted);
+  border: none;
+  border-bottom: 1px dashed transparent;
+  font-size: 11px;
+  font-family: var(--rb-font-mono);
+  outline: none;
+  padding: 0;
+  margin: 0;
+  min-width: 1ch;
+  width: auto;
+  transition: border-color 0.12s, color 0.12s;
+}
+.rb-screenshot__figure-input:hover {
+  border-bottom-color: var(--rb-border-subtle);
+}
+.rb-screenshot__figure-input:focus {
+  color: var(--rb-text-primary);
+  border-bottom-color: var(--rb-blue);
+}
+
+.rb-screenshot__caption-input {
+  flex: 1;
+  background: transparent;
+  color: var(--rb-text-secondary);
+  border: none;
+  font-size: 12px;
+  font-style: italic;
+  outline: none;
+}
+
+/* Finding card */
+.rb-finding-card {
+  margin: 14px 0;
+  border-radius: var(--rb-radius-lg);
+  background: var(--rb-bg-faint);
+  border: 1px solid var(--rb-border-subtle);
+  padding: 12px 14px 14px;
+}
+
+.rb-finding-card__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rb-finding-card__head-l {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.rb-finding-card__head-r {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rb-finding-card__id {
+  font-family: var(--rb-font-mono);
+  font-size: 11px;
+  color: var(--rb-text-secondary);
+  background: var(--rb-bg-active);
+  padding: 1px 6px;
+  border-radius: var(--rb-radius);
+}
+
+.rb-finding-card__title {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--rb-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rb-finding-card__open {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: transparent;
+  color: var(--rb-text-secondary);
+  border: 1px solid var(--rb-border-subtle);
+  border-radius: var(--rb-radius);
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.rb-finding-card__open:hover {
+  color: var(--rb-text-primary);
+  background: var(--rb-bg-hover);
+}
+
+.rb-finding-card__meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 12px 0;
+  padding: 8px 0;
+  border-top: 1px solid var(--rb-border-subtle);
+  border-bottom: 1px solid var(--rb-border-subtle);
+}
+
+.rb-finding-card__meta dt {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--rb-text-muted);
+  margin: 0 0 2px;
+}
+
+.rb-finding-card__meta dd {
+  font-family: var(--rb-font-mono);
+  font-size: 12px;
+  color: var(--rb-text-primary);
+  margin: 0;
+  word-break: break-word;
+}
+
+.rb-finding-card__body {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--rb-text-primary);
+}
+
+/* =========================================================
+   FindingPanel inputs
+   ========================================================= */
+
+.rb-finding-input {
+  width: 100%;
+  background: var(--rb-bg-base);
+  color: var(--rb-text-primary);
+  border: 1px solid var(--rb-border-subtle);
+  border-radius: var(--rb-radius);
+  padding: 5px 8px;
+  font-size: 12px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.rb-finding-input:focus {
+  border-color: var(--rb-blue);
+}
+
+/*
+ * Inline input within a meta block — borderless, transparent, sits flush
+ * against the row's right column. Used by the Finding panel's CVSS / Status
+ * / CWE / Affected list. Picks up focus only as a 1px border-bottom so
+ * meta rows don't expand on focus.
+ */
+.rb-meta-input {
+  width: 100%;
+  background: transparent;
+  color: var(--rb-text-primary);
+  border: 1px solid transparent;
+  border-radius: var(--rb-radius);
+  padding: 3px 6px;
+  font-size: 12px;
+  font-family: inherit;
+  outline: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.rb-meta-input:hover {
+  background: var(--rb-bg-hover);
+}
+
+.rb-meta-input:focus {
+  background: var(--rb-bg-base);
+  border-color: var(--rb-blue);
+}
+
+/*
+ * The big "click to rename" title in the editor header. Looks like a
+ * heading at rest; reveals a subtle underline on hover so the user can
+ * see it's interactive; focus shows a real underline in the accent
+ * color. Width:100% so the whole row is a click target — not just the
+ * narrow strip of rendered glyphs.
+ */
+.rb-editable-title {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 4px 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--rb-text-primary);
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  transition: border-color 0.18s ease;
+  cursor: text;
+}
+
+.rb-editable-title:hover:not(:focus) {
+  border-bottom-color: var(--rb-border-subtle);
+}
+
+.rb-editable-title:focus {
+  border-bottom-color: var(--rb-blue);
+}
+
+.rb-editable-title::placeholder {
+  color: var(--rb-text-subtle);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.rb-finding-textarea {
+  font-family: var(--rb-font-ui);
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.rb-finding-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: transparent;
+  color: var(--rb-text-muted);
+  border: 1px solid var(--rb-border-subtle);
+  border-radius: var(--rb-radius);
+  cursor: pointer;
+}
+
+.rb-finding-iconbtn:hover:not(:disabled) {
+  color: var(--rb-text-primary);
+  background: var(--rb-bg-hover);
+}
+
+.rb-finding-iconbtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.rb-finding-iconbtn--danger:hover {
+  color: var(--rb-red);
+}

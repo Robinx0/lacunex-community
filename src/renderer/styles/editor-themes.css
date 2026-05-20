@@ -1,0 +1,412 @@
+/*
+ * Editor themes. Each theme lives under [data-theme="<id>"] on the
+ * document root, so switching themes is a single attribute write.
+ * Notion-Dark is the default (no selector) so the app has sane variables
+ * before the theme JS has a chance to apply.
+ */
+
+:root {
+  --rb-bg-base: #191919;
+  --rb-bg-sidebar: #202020;
+  --rb-bg-popover: #2a2a2a;
+  --rb-bg-elevated: #2f2f2f;
+  --rb-bg-hover: rgba(255, 255, 255, 0.055);
+  --rb-bg-active: rgba(255, 255, 255, 0.094);
+  --rb-bg-faint: rgba(255, 255, 255, 0.024);
+
+  --rb-border: rgba(255, 255, 255, 0.094);
+  --rb-border-strong: rgba(255, 255, 255, 0.13);
+  --rb-border-subtle: rgba(255, 255, 255, 0.055);
+
+  --rb-text-primary: rgba(255, 255, 255, 0.81);
+  --rb-text-secondary: rgba(255, 255, 255, 0.46);
+  --rb-text-muted: rgba(255, 255, 255, 0.282);
+  --rb-text-subtle: rgba(255, 255, 255, 0.16);
+
+  --rb-blue: #529cca;
+  --rb-blue-bg: rgba(35, 131, 226, 0.14);
+  --rb-red: #ff7369;
+  --rb-red-bg: rgba(255, 115, 105, 0.13);
+  --rb-orange: #ffa344;
+  --rb-orange-bg: rgba(255, 163, 68, 0.13);
+  --rb-yellow: #ffdc49;
+  --rb-yellow-bg: rgba(255, 220, 73, 0.13);
+  --rb-green: #4dab9a;
+  --rb-green-bg: rgba(77, 171, 154, 0.13);
+  --rb-purple: #9a6dd7;
+  --rb-purple-bg: rgba(154, 109, 215, 0.13);
+  --rb-gray-bg: rgba(255, 255, 255, 0.055);
+
+  --rb-shadow-pop:
+    0 0 0 1px rgba(255, 255, 255, 0.094),
+    0 1px 4px rgba(0, 0, 0, 0.4),
+    0 12px 32px -12px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme='notion-light'] {
+  --rb-bg-base: #ffffff;
+  --rb-bg-sidebar: #f7f6f3;
+  --rb-bg-popover: #ffffff;
+  --rb-bg-elevated: #f1efed;
+  --rb-bg-hover: rgba(55, 53, 47, 0.06);
+  --rb-bg-active: rgba(55, 53, 47, 0.1);
+  --rb-bg-faint: rgba(55, 53, 47, 0.024);
+
+  --rb-border: rgba(55, 53, 47, 0.094);
+  --rb-border-strong: rgba(55, 53, 47, 0.16);
+  --rb-border-subtle: rgba(55, 53, 47, 0.05);
+
+  --rb-text-primary: rgb(55, 53, 47);
+  --rb-text-secondary: rgba(55, 53, 47, 0.65);
+  --rb-text-muted: rgba(55, 53, 47, 0.45);
+  --rb-text-subtle: rgba(55, 53, 47, 0.28);
+
+  --rb-blue: #2383e2;
+  --rb-blue-bg: rgba(35, 131, 226, 0.12);
+  --rb-red: #e03e3e;
+  --rb-red-bg: rgba(224, 62, 62, 0.1);
+  --rb-orange: #d9730d;
+  --rb-orange-bg: rgba(217, 115, 13, 0.1);
+  --rb-yellow: #cb912f;
+  --rb-yellow-bg: rgba(203, 145, 47, 0.14);
+  --rb-green: #0f7b6c;
+  --rb-green-bg: rgba(15, 123, 108, 0.1);
+  --rb-purple: #6940a5;
+  --rb-purple-bg: rgba(105, 64, 165, 0.1);
+  --rb-gray-bg: rgba(55, 53, 47, 0.06);
+
+  --rb-shadow-pop:
+    0 0 0 1px rgba(55, 53, 47, 0.094),
+    0 3px 6px rgba(15, 15, 15, 0.1),
+    0 9px 24px -8px rgba(15, 15, 15, 0.2);
+}
+
+[data-theme='tactical'] {
+  --rb-bg-base: #0a0c10;
+  --rb-bg-sidebar: #0e1218;
+  --rb-bg-popover: #141a22;
+  --rb-bg-elevated: #1a212b;
+  --rb-bg-hover: rgba(98, 212, 245, 0.06);
+  --rb-bg-active: rgba(98, 212, 245, 0.12);
+  --rb-bg-faint: rgba(255, 255, 255, 0.02);
+
+  --rb-border: rgba(98, 212, 245, 0.1);
+  --rb-border-strong: rgba(98, 212, 245, 0.18);
+  --rb-border-subtle: rgba(255, 255, 255, 0.05);
+
+  --rb-text-primary: #dde4ec;
+  --rb-text-secondary: #8d97a5;
+  --rb-text-muted: #5b6573;
+  --rb-text-subtle: #3d4754;
+
+  --rb-blue: #62d4f5;
+  --rb-blue-bg: rgba(98, 212, 245, 0.1);
+  --rb-red: #ff4570;
+  --rb-red-bg: rgba(255, 69, 112, 0.1);
+  --rb-orange: #ff8c42;
+  --rb-orange-bg: rgba(255, 140, 66, 0.1);
+  --rb-yellow: #f5b461;
+  --rb-yellow-bg: rgba(245, 180, 97, 0.1);
+  --rb-green: #6ee7b7;
+  --rb-green-bg: rgba(110, 231, 183, 0.1);
+  --rb-purple: #a78bfa;
+  --rb-purple-bg: rgba(167, 139, 250, 0.1);
+  --rb-gray-bg: rgba(255, 255, 255, 0.04);
+
+  --rb-shadow-pop:
+    0 0 0 1px rgba(98, 212, 245, 0.18),
+    0 1px 4px rgba(0, 0, 0, 0.4),
+    0 12px 32px -12px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme='tactical'] body {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      rgba(255, 255, 255, 0.008) 3px,
+      rgba(255, 255, 255, 0.008) 4px
+    ),
+    radial-gradient(ellipse at top, rgba(98, 212, 245, 0.04), transparent 60%);
+}
+
+[data-theme='solarized-dark'] {
+  --rb-bg-base: #002b36;
+  --rb-bg-sidebar: #073642;
+  --rb-bg-popover: #073642;
+  --rb-bg-elevated: #094858;
+  --rb-bg-hover: rgba(238, 232, 213, 0.06);
+  --rb-bg-active: rgba(238, 232, 213, 0.1);
+  --rb-bg-faint: rgba(238, 232, 213, 0.024);
+
+  --rb-border: rgba(147, 161, 161, 0.1);
+  --rb-border-strong: rgba(147, 161, 161, 0.18);
+  --rb-border-subtle: rgba(147, 161, 161, 0.05);
+
+  --rb-text-primary: #93a1a1;
+  --rb-text-secondary: #839496;
+  --rb-text-muted: #657b83;
+  --rb-text-subtle: #586e75;
+
+  --rb-blue: #268bd2;
+  --rb-blue-bg: rgba(38, 139, 210, 0.13);
+  --rb-red: #dc322f;
+  --rb-red-bg: rgba(220, 50, 47, 0.13);
+  --rb-orange: #cb4b16;
+  --rb-orange-bg: rgba(203, 75, 22, 0.13);
+  --rb-yellow: #b58900;
+  --rb-yellow-bg: rgba(181, 137, 0, 0.13);
+  --rb-green: #859900;
+  --rb-green-bg: rgba(133, 153, 0, 0.13);
+  --rb-purple: #6c71c4;
+  --rb-purple-bg: rgba(108, 113, 196, 0.13);
+  --rb-gray-bg: rgba(238, 232, 213, 0.05);
+
+  --rb-shadow-pop:
+    0 0 0 1px rgba(147, 161, 161, 0.16),
+    0 1px 4px rgba(0, 0, 0, 0.4),
+    0 12px 32px -12px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme='dracula'] {
+  --rb-bg-base: #282a36;
+  --rb-bg-sidebar: #21222c;
+  --rb-bg-popover: #383a59;
+  --rb-bg-elevated: #44475a;
+  --rb-bg-hover: rgba(248, 248, 242, 0.06);
+  --rb-bg-active: rgba(248, 248, 242, 0.1);
+  --rb-bg-faint: rgba(248, 248, 242, 0.024);
+
+  --rb-border: rgba(248, 248, 242, 0.094);
+  --rb-border-strong: rgba(248, 248, 242, 0.16);
+  --rb-border-subtle: rgba(248, 248, 242, 0.05);
+
+  --rb-text-primary: #f8f8f2;
+  --rb-text-secondary: #b8c0e0;
+  --rb-text-muted: #6272a4;
+  --rb-text-subtle: #44475a;
+
+  --rb-blue: #bd93f9;
+  --rb-blue-bg: rgba(189, 147, 249, 0.13);
+  --rb-red: #ff5555;
+  --rb-red-bg: rgba(255, 85, 85, 0.13);
+  --rb-orange: #ffb86c;
+  --rb-orange-bg: rgba(255, 184, 108, 0.13);
+  --rb-yellow: #f1fa8c;
+  --rb-yellow-bg: rgba(241, 250, 140, 0.13);
+  --rb-green: #50fa7b;
+  --rb-green-bg: rgba(80, 250, 123, 0.13);
+  --rb-purple: #ff79c6;
+  --rb-purple-bg: rgba(255, 121, 198, 0.13);
+  --rb-gray-bg: rgba(248, 248, 242, 0.06);
+
+  --rb-shadow-pop:
+    0 0 0 1px rgba(189, 147, 249, 0.2),
+    0 1px 4px rgba(0, 0, 0, 0.5),
+    0 12px 32px -12px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme='tokyo-night'] {
+  --rb-bg-base: #1a1b26;
+  --rb-bg-sidebar: #16161e;
+  --rb-bg-popover: #24283b;
+  --rb-bg-elevated: #292e42;
+  --rb-bg-hover: rgba(192, 202, 245, 0.06);
+  --rb-bg-active: rgba(192, 202, 245, 0.1);
+  --rb-bg-faint: rgba(192, 202, 245, 0.024);
+
+  --rb-border: rgba(192, 202, 245, 0.1);
+  --rb-border-strong: rgba(192, 202, 245, 0.18);
+  --rb-border-subtle: rgba(192, 202, 245, 0.05);
+
+  --rb-text-primary: #c0caf5;
+  --rb-text-secondary: #a9b1d6;
+  --rb-text-muted: #565f89;
+  --rb-text-subtle: #3b4261;
+
+  --rb-blue: #7aa2f7;
+  --rb-blue-bg: rgba(122, 162, 247, 0.13);
+  --rb-red: #f7768e;
+  --rb-red-bg: rgba(247, 118, 142, 0.13);
+  --rb-orange: #ff9e64;
+  --rb-orange-bg: rgba(255, 158, 100, 0.13);
+  --rb-yellow: #e0af68;
+  --rb-yellow-bg: rgba(224, 175, 104, 0.13);
+  --rb-green: #9ece6a;
+  --rb-green-bg: rgba(158, 206, 106, 0.13);
+  --rb-purple: #bb9af7;
+  --rb-purple-bg: rgba(187, 154, 247, 0.13);
+  --rb-gray-bg: rgba(192, 202, 245, 0.05);
+
+  --rb-shadow-pop:
+    0 0 0 1px rgba(122, 162, 247, 0.18),
+    0 1px 4px rgba(0, 0, 0, 0.5),
+    0 12px 32px -12px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme='github-dark'] {
+  --rb-bg-base: #0d1117;
+  --rb-bg-sidebar: #010409;
+  --rb-bg-popover: #161b22;
+  --rb-bg-elevated: #21262d;
+  --rb-bg-hover: rgba(177, 186, 196, 0.08);
+  --rb-bg-active: rgba(177, 186, 196, 0.12);
+  --rb-bg-faint: rgba(177, 186, 196, 0.03);
+
+  --rb-border: #30363d;
+  --rb-border-strong: #6e7681;
+  --rb-border-subtle: #21262d;
+
+  --rb-text-primary: #e6edf3;
+  --rb-text-secondary: #c9d1d9;
+  --rb-text-muted: #8b949e;
+  --rb-text-subtle: #6e7681;
+
+  --rb-blue: #58a6ff;
+  --rb-blue-bg: rgba(56, 139, 253, 0.13);
+  --rb-red: #f85149;
+  --rb-red-bg: rgba(248, 81, 73, 0.13);
+  --rb-orange: #fb8500;
+  --rb-orange-bg: rgba(251, 133, 0, 0.13);
+  --rb-yellow: #d29922;
+  --rb-yellow-bg: rgba(210, 153, 34, 0.13);
+  --rb-green: #3fb950;
+  --rb-green-bg: rgba(63, 185, 80, 0.13);
+  --rb-purple: #bc8cff;
+  --rb-purple-bg: rgba(188, 140, 255, 0.13);
+  --rb-gray-bg: rgba(177, 186, 196, 0.05);
+
+  --rb-shadow-pop:
+    0 0 0 1px rgba(88, 166, 255, 0.2),
+    0 1px 4px rgba(0, 0, 0, 0.6),
+    0 12px 32px -12px rgba(0, 0, 0, 0.85);
+}
+
+[data-theme='gruvbox-dark'] {
+  --rb-bg-base: #282828;
+  --rb-bg-sidebar: #1d2021;
+  --rb-bg-popover: #32302f;
+  --rb-bg-elevated: #3c3836;
+  --rb-bg-hover: rgba(235, 219, 178, 0.07);
+  --rb-bg-active: rgba(235, 219, 178, 0.11);
+  --rb-bg-faint: rgba(235, 219, 178, 0.025);
+
+  --rb-border: #504945;
+  --rb-border-strong: #665c54;
+  --rb-border-subtle: #3c3836;
+
+  --rb-text-primary: #ebdbb2;
+  --rb-text-secondary: #d5c4a1;
+  --rb-text-muted: #a89984;
+  --rb-text-subtle: #7c6f64;
+
+  --rb-blue: #83a598;
+  --rb-blue-bg: rgba(131, 165, 152, 0.14);
+  --rb-red: #fb4934;
+  --rb-red-bg: rgba(251, 73, 52, 0.13);
+  --rb-orange: #fe8019;
+  --rb-orange-bg: rgba(254, 128, 25, 0.13);
+  --rb-yellow: #fabd2f;
+  --rb-yellow-bg: rgba(250, 189, 47, 0.13);
+  --rb-green: #b8bb26;
+  --rb-green-bg: rgba(184, 187, 38, 0.13);
+  --rb-purple: #d3869b;
+  --rb-purple-bg: rgba(211, 134, 155, 0.13);
+  --rb-gray-bg: rgba(235, 219, 178, 0.05);
+
+  --rb-shadow-pop:
+    0 0 0 1px rgba(131, 165, 152, 0.18),
+    0 1px 4px rgba(0, 0, 0, 0.55),
+    0 12px 32px -12px rgba(0, 0, 0, 0.75);
+}
+
+/*
+ * MANUSCRIPT — aged paper background + serif typography. Inspired by old
+ * leather-bound report books and reference monographs. The whole UI
+ * surface (sidebar, topbar, panels, editor) uses a warm cream tone with
+ * sepia ink, and the editor body falls back to a serif so writing reads
+ * like a hand-set page.
+ */
+[data-theme='manuscript'] {
+  --rb-bg-base: #f6f1e7;
+  --rb-bg-sidebar: #efe7d4;
+  --rb-bg-popover: #fbf8f1;
+  --rb-bg-elevated: #f1e9d6;
+  --rb-bg-hover: rgba(74, 58, 31, 0.06);
+  --rb-bg-active: rgba(74, 58, 31, 0.12);
+  --rb-bg-faint: rgba(74, 58, 31, 0.03);
+
+  --rb-border: rgba(74, 58, 31, 0.18);
+  --rb-border-strong: rgba(74, 58, 31, 0.28);
+  --rb-border-subtle: rgba(74, 58, 31, 0.1);
+
+  --rb-text-primary: #2a1f0e;
+  --rb-text-secondary: rgba(42, 31, 14, 0.74);
+  --rb-text-muted: rgba(74, 58, 31, 0.6);
+  --rb-text-subtle: rgba(74, 58, 31, 0.4);
+
+  --rb-blue: #1e3a8a;
+  --rb-blue-bg: rgba(30, 58, 138, 0.1);
+  --rb-red: #b91c2b;
+  --rb-red-bg: rgba(185, 28, 43, 0.1);
+  --rb-orange: #b45309;
+  --rb-orange-bg: rgba(180, 83, 9, 0.12);
+  --rb-yellow: #92400e;
+  --rb-yellow-bg: rgba(146, 64, 14, 0.1);
+  --rb-green: #0f5132;
+  --rb-green-bg: rgba(15, 81, 50, 0.1);
+  --rb-purple: #5b21b6;
+  --rb-purple-bg: rgba(91, 33, 182, 0.1);
+  --rb-gray-bg: rgba(74, 58, 31, 0.06);
+
+  --rb-shadow-pop:
+    0 0 0 1px rgba(74, 58, 31, 0.16),
+    0 3px 6px rgba(74, 58, 31, 0.1),
+    0 9px 24px -8px rgba(74, 58, 31, 0.2);
+}
+
+/* Layered paper texture — aged grain via two repeating overlays. */
+[data-theme='manuscript'] body {
+  background-image:
+    radial-gradient(rgba(146, 64, 14, 0.04) 1px, transparent 1px),
+    radial-gradient(rgba(146, 64, 14, 0.025) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 240, 210, 0.4), transparent 30%);
+  background-size:
+    3px 3px,
+    7px 7px,
+    100% 100%;
+  background-position:
+    0 0,
+    1px 1px,
+    0 0;
+}
+
+/* Serif everywhere on Manuscript — chrome inherits the editorial mood. */
+[data-theme='manuscript'],
+[data-theme='manuscript'] .rb-prose {
+  font-family: var(--rb-font-serif);
+}
+
+[data-theme='manuscript'] .rb-prose h1,
+[data-theme='manuscript'] .rb-prose h2,
+[data-theme='manuscript'] .rb-prose h3,
+[data-theme='manuscript'] .rb-editable-title {
+  font-family: var(--rb-font-serif);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* Italics in the manuscript body lean into the cursive feel. */
+[data-theme='manuscript'] .rb-prose em {
+  font-family: var(--rb-font-serif);
+  font-style: italic;
+}
+
+/* The mono / utility surfaces (codes, IDs, mode chips) keep their fonts
+   so the typographic contrast still reads. */
+[data-theme='manuscript'] .rb-mono,
+[data-theme='manuscript'] code,
+[data-theme='manuscript'] pre {
+  font-family: var(--rb-font-mono);
+}

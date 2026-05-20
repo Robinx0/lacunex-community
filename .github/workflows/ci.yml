@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# CI only reads — it doesn't push tags, create releases, or
+# comment. Pinning to contents:read overrides the repo default and
+# limits the blast radius if any step here is ever compromised.
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify (typecheck + lint + test)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      # `npm ci` runs the postinstall (electron-rebuild) which needs a
+      # working build toolchain on Linux. The runner has it preinstalled.
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate migrations
+        run: npm run gen:migrations
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test

@@ -1,0 +1,16 @@
+<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .ink { color: #0e1217; }
+    @media (prefers-color-scheme: dark) { .ink { color: #f1f3f8; } }
+  </style>
+  <g class="ink">
+    <rect x="4" y="7" width="24" height="29" rx="5" fill="currentColor" opacity="0.16"/>
+    <line x1="9.5" y1="15" x2="22.5" y2="15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/>
+    <line x1="9.5" y1="20" x2="19" y2="20" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity="0.35"/>
+    <line x1="9.5" y1="25" x2="20.5" y2="25" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity="0.30"/>
+    <rect x="12" y="4" width="24" height="29" rx="5" stroke="currentColor" stroke-width="1.7" fill="none"/>
+    <path d="M16 9 L32 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity="0.55"/>
+  </g>
+  <circle cx="31.5" cy="28" r="3.6" fill="#62d4f5" opacity="0.35"/>
+  <circle cx="31.5" cy="28" r="2.3" fill="#62d4f5"/>
+</svg>

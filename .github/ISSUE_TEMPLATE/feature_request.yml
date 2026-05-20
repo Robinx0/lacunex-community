@@ -1,0 +1,52 @@
+name: Feature request
+description: Suggest a feature, template, or workflow improvement.
+title: "[feature] "
+labels: ["feature", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Lacunex is opinionated. Not every request will land.
+        The clearer the user-facing problem, the easier it is to
+        say yes (or no, with a reason).
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the user-facing pain. "I'm a compliance auditor and I keep copy-pasting evidence URLs by hand because…" beats "add a feature for X".
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What should happen?
+      description: Sketch the behavior. Don't worry about implementation; describe the user experience.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you've considered
+      description: Workarounds you tried, other tools that handle this, partial solutions you'd accept.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: who
+    attributes:
+      label: Who is this for?
+      multiple: true
+      options:
+        - Pentesters / red team
+        - Audit / compliance teams
+        - SRE / DevOps writing postmortems
+        - Consulting firms
+        - Solo consultants
+        - Technical writers
+        - Other (describe in proposal)
+    validations:
+      required: true
+

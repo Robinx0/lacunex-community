@@ -1,0 +1,90 @@
+name: Release
+
+# Triggered when a tag matching v*.*.* is pushed (e.g. v0.1.0).
+# To cut a release:
+#   1. Bump version in package.json
+#   2. Update CHANGELOG.md
+#   3. git tag v0.1.0 && git push origin v0.1.0
+#
+# This workflow:
+#   - Builds Lacunex Community for macOS (x64+arm64), Windows (x64),
+#     and Linux (x64) on the matching matrix runner.
+#   - Publishes the artifacts to a GitHub Release as a draft.
+#   - Does NOT code-sign. The installers ship unsigned for now; the README
+#     install section documents the per-platform "right-click then Open"
+#     workarounds for users.
+#
+# Required secret: none beyond the default GITHUB_TOKEN. electron-builder's
+# `publish: github` uses GH_TOKEN or GITHUB_TOKEN for the GitHub Releases
+# API call.
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to build (e.g. v0.1.0). Manual runs only.'
+        required: true
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+# electron-builder uploads installer artifacts via the GitHub Releases
+# API; that requires contents:write on GITHUB_TOKEN. Default workflow
+# token is read-only, which surfaces as a 403 at the upload step.
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      # rpmbuild is needed to produce .rpm packages on Linux; it's
+      # not preinstalled on ubuntu-latest. Skips on macOS / Windows.
+      - name: Install rpm tooling (Linux only)
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get update && sudo apt-get install -y rpm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate migrations
+        run: npm run gen:migrations
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test
+
+      - name: Build + publish to GitHub Releases
+        # --publish always: uploads to the draft release matching the
+        # tag. Release stays in draft state — review + publish manually
+        # after all three platforms have uploaded.
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+        run: npm run package -- --publish always

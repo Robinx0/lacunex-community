@@ -1,0 +1,185 @@
+{
+  "name": "lacunex-community",
+  "version": "1.0.0",
+  "description": "Local-first desktop report builder for pentest, audit, incident, and consulting work.",
+  "private": true,
+  "type": "module",
+  "main": "out/main/index.js",
+  "author": "Irfanul Montasir",
+  "license": "PolyForm-Shield-1.0.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "electron",
+    "report-builder",
+    "pentest",
+    "audit",
+    "incident-response",
+    "consulting",
+    "local-first",
+    "markdown"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Robinx0/lacunex-community.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Robinx0/lacunex-community/issues"
+  },
+  "homepage": "https://github.com/Robinx0/lacunex-community#readme",
+  "scripts": {
+    "gen:migrations": "node scripts/build-migrations.mjs",
+    "gen:icons": "node scripts/build-icons.mjs",
+    "clean": "node scripts/clean.mjs",
+    "rebuild:electron": "electron-rebuild -f -w better-sqlite3",
+    "rebuild:node": "cd node_modules/better-sqlite3 && prebuild-install --runtime napi --target 9 || npm rebuild",
+    "predev": "npm run gen:migrations && npm run rebuild:electron",
+    "prebuild": "npm run gen:migrations && npm run rebuild:electron",
+    "prepackage": "npm run gen:migrations && npm run rebuild:electron",
+    "prepackage:all": "npm run gen:migrations && npm run rebuild:electron",
+    "pretypecheck": "npm run gen:migrations",
+    "pretest": "npm run gen:migrations && npm run rebuild:node",
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "typecheck:node": "tsc -p tsconfig.node.json --noEmit",
+    "typecheck:web": "tsc -p tsconfig.web.json --noEmit",
+    "typecheck": "npm run typecheck:node && npm run typecheck:web",
+    "lint": "eslint . --ext .ts,.tsx --max-warnings 0",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css,json,md}\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "package": "electron-vite build && electron-builder",
+    "package:all": "electron-vite build && electron-builder -mwl",
+    "prepare": "husky"
+  },
+  "build": {
+    "appId": "com.lacunex.community",
+    "productName": "Lacunex Community",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "out/**/*",
+      "build/icon.png",
+      "build/source.svg",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "**/node_modules/better-sqlite3/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["universal"]
+        }
+      ],
+      "artifactName": "${productName}-${version}-Universal.${ext}",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "linux": {
+      "category": "Development",
+      "synopsis": "Local-first desktop report builder for pentest, audit, incident, and consulting work.",
+      "description": "Lacunex Community is a desktop app for writing security and audit reports. Block-style editor, severity-aware findings, scaffolds for pentest and audit work, five designed covers, and exports to PDF, HTML, Markdown, and Word. No cloud sync, no telemetry, no account.",
+      "target": [
+        { "target": "AppImage", "arch": ["x64"] },
+        { "target": "deb",      "arch": ["x64"] },
+        { "target": "rpm",      "arch": ["x64"] }
+      ]
+    },
+    "deb": {
+      "depends": ["libgtk-3-0", "libnotify4", "libnss3", "libxss1", "libxtst6", "xdg-utils", "libatspi2.0-0"]
+    },
+    "rpm": {
+      "depends": ["libnotify", "libXScrnSaver"]
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Robinx0",
+        "repo": "lacunex-community"
+      }
+    ]
+  },
+  "dependencies": {
+    "@tiptap/core": "^2.27.2",
+    "@tiptap/extension-code-block-lowlight": "^2.27.2",
+    "@tiptap/extension-link": "^2.27.2",
+    "@tiptap/extension-placeholder": "^2.27.2",
+    "@tiptap/pm": "^2.27.2",
+    "@tiptap/react": "^2.27.2",
+    "@tiptap/starter-kit": "^2.27.2",
+    "@tiptap/suggestion": "^2.27.2",
+    "better-sqlite3": "^11.10.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "docx": "^9.6.1",
+    "electron-store": "^10.1.0",
+    "electron-updater": "^6.8.3",
+    "highlight.js": "^11.11.1",
+    "lowlight": "^3.3.0",
+    "lucide-react": "^0.460.0",
+    "nanoid": "^5.0.7",
+    "pagedjs": "^0.4.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.5.4",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.25.76",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^3.7.2",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.13.0",
+    "@typescript-eslint/parser": "^8.13.0",
+    "@vitejs/plugin-react": "^4.3.3",
+    "autoprefixer": "^10.4.20",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "electron-vite": "^2.3.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "postcss": "^8.4.49",
+    "prettier": "^3.3.3",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10",
+    "vitest": "^2.1.4"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
+    ]
+  }
+}

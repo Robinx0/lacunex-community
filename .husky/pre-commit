@@ -1,0 +1,11 @@
+npx lint-staged
+
+# Strict typecheck — catches type breaks before CI even sees the diff.
+npm run typecheck
+
+# Run only the tests that touch a changed file. Falls back to full suite
+# if `vitest related` returns nothing (e.g. config-only change).
+CHANGED=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(ts|tsx)$' || true)
+if [ -n "$CHANGED" ]; then
+  npx vitest related --run $CHANGED || exit 1
+fi

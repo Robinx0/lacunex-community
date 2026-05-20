@@ -1,0 +1,90 @@
+name: Bug report
+description: Something is broken or behaves incorrectly.
+title: "[bug] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please fill in as much as you can. The
+        more concrete the repro, the faster the fix.
+
+  - type: input
+    id: version
+    attributes:
+      label: Lacunex version
+      description: From Help &rarr; About. Don't say "latest", paste the actual version string.
+      placeholder: "1.0.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - macOS (arm64)
+        - macOS (x64)
+        - Windows (x64)
+        - Linux (x64)
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: os-version
+    attributes:
+      label: OS version
+      placeholder: "macOS 14.4 / Windows 11 23H2 / Ubuntu 24.04"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear, factual description. Avoid "it doesn't work". Describe what you saw vs. what you expected.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro-steps
+    attributes:
+      label: Reproduction steps
+      description: Numbered steps. If we can't reproduce it, we can't fix it.
+      placeholder: |
+        1. Open a new report.
+        2. Pick "Engineering Postmortem".
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / screenshots
+      description: |
+        Console output (View → Toggle Developer Tools → Console) helps a lot.
+        For crashes, the system crash report path:
+          - macOS: ~/Library/Logs/DiagnosticReports/
+          - Windows: %LOCALAPPDATA%\CrashDumps
+          - Linux: usually in syslog or the terminal where you launched the AppImage
+      render: text
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: data-handling
+    attributes:
+      label: Data handling
+      description: Lacunex is local-first. Don't paste real client data, secrets, or finding details into this issue.
+      options:
+        - label: I confirm this report contains no real client data, credentials, or sensitive information.
+          required: true
