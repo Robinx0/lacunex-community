@@ -97,6 +97,7 @@
     },
     "linux": {
       "category": "Development",
+      "maintainer": "Irfanul Montasir <88659091+Robinx0@users.noreply.github.com>",
       "synopsis": "Local-first desktop report builder for pentest, audit, incident, and consulting work.",
       "description": "Lacunex Community is a desktop app for writing security and audit reports. Block-style editor, severity-aware findings, scaffolds for pentest and audit work, five designed covers, and exports to PDF, HTML, Markdown, and Word. No cloud sync, no telemetry, no account.",
       "target": [
