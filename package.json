@@ -1,6 +1,6 @@
 {
   "name": "lacunex-community",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Local-first desktop report builder for pentest, audit, incident, and consulting work.",
   "private": true,
   "type": "module",
